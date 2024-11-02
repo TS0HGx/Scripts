@@ -186,7 +186,7 @@ function prepareWindowContent(windowBody) {
 				}
 
 				loadJS('https://code.jquery.com/jquery-3.6.0.min.js', function() {
-					loadJS('https://ts0hgx.github.io/Scripts/MassPlannerHelper.js', function() {
+					loadJS('https://twscripts.dev/scripts/attackPlannerHelper.js', function() {
 						console.log('Helper libraries loaded!');
 					});
 				});
