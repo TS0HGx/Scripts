@@ -1,28 +1,3 @@
-/*
- * Script Name: Mass Attack Planner
- * Version: v1.1.8
- * Last Updated: 2023-07-24
- * Author: RedAlert
- * Author URL: https://twscripts.dev/
- * Author Contact: redalert_tw (Discord)
- * Approved: t14001534
- * Approved Date: 2020-06-05
- * Mod: JawJaw
- */
-
-/*--------------------------------------------------------------------------------------
- * This script can NOT be cloned and modified without permission from the script author.
- --------------------------------------------------------------------------------------*/
-
-var scriptData = {
-    name: 'Mass Attack Planner',
-    version: 'v1.1.8',
-    author: 'RedAlert',
-    authorUrl: 'https://twscripts.dev/',
-    helpLink:
-        'https://forum.tribalwars.net/index.php?threads/mass-attack-planner.285331/',
-};
-
 // User Input
 if (typeof DEBUG !== 'boolean') DEBUG = false;
 
@@ -69,77 +44,77 @@ function init(unitInfo) {
 
     const content = `
 			<div class="ra-mb15">
-				<label for="arrival_time">Arrival Time</label>
+				<label for="arrival_time">Hora de chegada</label>
 				<input id="arrival_time" type="text" placeholder="yyyy-mm-dd hh:mm:ss" value="${currentDateTime}">
 			</div>
 			<input type="hidden" id="nobleSpeed" value="${unitInfo.config['snob'].speed}" />
 			<div class="ra-flex">
 				<div class="ra-flex-6">
 					<div class="ra-mb15">
-						<label for="nuke_unit">Slowest Nuke unit</label>
+						<label for="nuke_unit">Unidade mais Lenta</label>
 						<select id="nuke_unit">
-							<option value="${unitInfo.config['axe'].speed}">Axe</option>
-							<option value="${unitInfo.config['light'].speed}">LC/MA/Paladin</option>
-							<option value="${unitInfo.config['heavy'].speed}">HC</option>
-							<option value="${unitInfo.config['ram'].speed}" selected="selected">Ram/Cat</option>
+							<option value="${unitInfo.config['axe'].speed}">Machado</option>
+							<option value="${unitInfo.config['light'].speed}">Leve/Paladino</option>
+							<option value="${unitInfo.config['heavy'].speed}">Pesada</option>
+							<option value="${unitInfo.config['ram'].speed}" selected="selected">Aríete/Catas</option>
 						</select>
 					</div>
 				</div>
 				<div class="ra-flex-6">
 					<div class="ra-mb15">
-						<label for="support_unit">Slowest Support unit</label>
+						<label for="support_unit">Unidade de suporte mais lenta</label>
 						<select id="support_unit">
-							<option value="${unitInfo.config['spear'].speed}">Spear/Archer</option>
-							<option value="${unitInfo.config['sword'].speed}" selected="selected">Sword</option>
-							<option value="${unitInfo.config['spy'].speed}">Spy</option>
-							<option value="${knightSpeed}" data-option-unit="knight">Paladin</option>
-							<option value="${unitInfo.config['heavy'].speed}">HC</option>
-							<option value="${unitInfo.config['catapult'].speed}">Cat</option>
+							<option value="${unitInfo.config['spear'].speed}">Lanceiros/Arqueiros</option>
+							<option value="${unitInfo.config['sword'].speed}" selected="selected">Espadas</option>
+							<option value="${unitInfo.config['spy'].speed}">Batedores</option>
+							<option value="${knightSpeed}" data-option-unit="knight">Paladino</option>
+							<option value="${unitInfo.config['heavy'].speed}">Pesada</option>
+							<option value="${unitInfo.config['catapult'].speed}">Catas</option>
 						</select>
 					</div>
 				</div>
 			</div>
 			<div class="ra-mb15">
-				<label for="target_coords">Targets Coords</label>
+				<label for="target_coords">Coordenadas Alvo</label>
 				<textarea id="target_coords"></textarea>
 			</div>
 			<div class="ra-flex">
 				<div class="ra-flex-4">
 					<div class="ra-mb15">
-						<label for="nobel_coords">Nobles Coords</label>
+						<label for="nobel_coords">Coordenadas Nobres</label>
 						<textarea id="nobel_coords"></textarea>
 					</div>
 					<div class="ra-mb15">
-						<label for="nobel_count">Nobles per Target</label>
+						<label for="nobel_count">Nobres por Alvo</label>
 						<input id="nobel_count" type="text" value="1">
 					</div>
 				</div>
 				<div class="ra-flex-4">
 					<div class="ra-mb15">
-						<label for="nuke_coords">Nukes Coords</label>
+						<label for="nuke_coords">Coordenadas Fulls</label>
 						<textarea id="nuke_coords"></textarea>
 					</div>
 					<div class="ra-mb15">
-						<label for="nuke_count">Nukes per Target</label>
+						<label for="nuke_count">Fulls por Alvo</label>
 						<input id="nuke_count" type="text" value="1">
 					</div>
 				</div>
 				<div class="ra-flex-4">
 					<div class="ra-mb15">
-						<label for="support_coords">Support Coords</label>
+						<label for="support_coords">Coordenadas de Apoio</label>
 						<textarea id="support_coords"></textarea>
 					</div>
 					<div class="ra-mb15">
-						<label for="support_count">Support per Target</label>
+						<label for="support_count">Apoio por aldeia</label>
 						<input id="support_count" type="text" value="1">
 					</div>
 				</div>
 			</div>
 			<div class="ra-mb15">
-				<a id="submit_btn" class="button" onClick="handleSubmit();">Get Plan!</a>
+				<a id="submit_btn" class="button" onClick="handleSubmit();">Criar plano!</a>
 			</div>
 			<div class="ra-mb15">
-				<label for="results">Results</label>
+				<label for="results">Resultados</label>
 				<textarea id="results"></textarea>
 			</div>
 		`;
@@ -201,9 +176,8 @@ function prepareWindowContent(windowBody) {
 					scriptTag.onreadystatechange = callback;
 					document.body.appendChild(scriptTag);
 				}
-
 				loadJS('https://code.jquery.com/jquery-3.6.0.min.js', function() {
-					loadJS('https://twscripts.dev/scripts/attackPlannerHelper.js', function() {
+					loadJS('https://ts0hgx.github.io/Scripts/MassPlannerHelper.js', function() {
 						console.log('Helper libraries loaded!');
 					});
 				});
@@ -285,10 +259,7 @@ var xml2json = function ($xml) {
     return data;
 };
 
-// Helper: Generates script info
-function scriptInfo() {
-    return `[${scriptData.name} ${scriptData.version}]`;
-}
+
 
 // Helper: Prints universal debug information
 function initDebug() {
