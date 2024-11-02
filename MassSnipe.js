@@ -6,11 +6,11 @@ var scriptConfig = {
     scriptData: {
         prefix: 'massSnipe',
         name: 'Mass Snipe',
-        version: 'v1.1.3',
-        author: 'RedAlert',
-        authorUrl: 'https://twscripts.dev/',
+        version: '',
+        author: '',
+        authorUrl: '',
         helpLink:
-            'https://forum.tribalwars.net/index.php?threads/mass-snipe.290217/',
+            '',
     },
     translations: {
         en_DK: {
