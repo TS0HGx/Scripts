@@ -81,7 +81,7 @@ var scriptConfig = {
             'Take into account incoming support':
                 'ter em consideração os apoios a caminho',
             'Invalid input!': 'O que introduziu não é válido!',
-            '[SIM]': '[SIM]',
+            '[SIM]': '[Simulador]',
             'more nuke like this is killed.': 'Mais fulls como este são mortos.',
             'more nukes like this are killed.':
                 'Mais nukes como este são mortos .',
