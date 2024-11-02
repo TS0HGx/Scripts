@@ -1,11 +1,3 @@
-var scriptData = {
-    name: 'Mass Attack Planner',
-    version: 'v1.1.8',
-    author: 'RedAlert',
-    authorUrl: 'https://twscripts.dev/',
-    helpLink:
-        'https://forum.tribalwars.net/index.php?threads/mass-attack-planner.285331/',
-};
 
 // User Input
 if (typeof DEBUG !== 'boolean') DEBUG = false;
