@@ -100,7 +100,7 @@ try {
 	}
 
 	function get_twcode(plan, land_time) {
-		var twcode = `[size=12][b]Landing time: ${land_time}[/b][/size]\n\n`;
+		var twcode = `[size=12][b]Tempo de chegada: ${land_time}[/b][/size]\n\n`;
 
 		var colour = '';
 
