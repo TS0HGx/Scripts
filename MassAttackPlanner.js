@@ -1,11 +1,28 @@
+/*
+ * Script Name: Mass Attack Planner
+ * Version: v1.1.8
+ * Last Updated: 2023-07-24
+ * Author: RedAlert
+ * Author URL: https://twscripts.dev/
+ * Author Contact: redalert_tw (Discord)
+ * Approved: t14001534
+ * Approved Date: 2020-06-05
+ * Mod: JawJaw
+ */
+
+/*--------------------------------------------------------------------------------------
+ * This script can NOT be cloned and modified without permission from the script author.
+ --------------------------------------------------------------------------------------*/
+
 var scriptData = {
-    name: 'Planeador de ataque em massa',
-    version: 'v1',
-    author: 'P',
-    authorUrl: 'https://',
+    name: 'Mass Attack Planner',
+    version: 'v1.1.8',
+    author: 'RedAlert',
+    authorUrl: 'https://twscripts.dev/',
     helpLink:
-        'https://',
+        'https://forum.tribalwars.net/index.php?threads/mass-attack-planner.285331/',
 };
+
 // User Input
 if (typeof DEBUG !== 'boolean') DEBUG = false;
 
@@ -52,77 +69,77 @@ function init(unitInfo) {
 
     const content = `
 			<div class="ra-mb15">
-				<label for="arrival_time">Hora de chegada</label>
+				<label for="arrival_time">Arrival Time</label>
 				<input id="arrival_time" type="text" placeholder="yyyy-mm-dd hh:mm:ss" value="${currentDateTime}">
 			</div>
 			<input type="hidden" id="nobleSpeed" value="${unitInfo.config['snob'].speed}" />
 			<div class="ra-flex">
 				<div class="ra-flex-6">
 					<div class="ra-mb15">
-						<label for="nuke_unit">Unidade mais Lenta</label>
+						<label for="nuke_unit">Slowest Nuke unit</label>
 						<select id="nuke_unit">
-							<option value="${unitInfo.config['axe'].speed}">Machado</option>
-							<option value="${unitInfo.config['light'].speed}">Leve/Paladino</option>
-							<option value="${unitInfo.config['heavy'].speed}">Pesada</option>
-							<option value="${unitInfo.config['ram'].speed}" selected="selected">Aríete/Catas</option>
+							<option value="${unitInfo.config['axe'].speed}">Axe</option>
+							<option value="${unitInfo.config['light'].speed}">LC/MA/Paladin</option>
+							<option value="${unitInfo.config['heavy'].speed}">HC</option>
+							<option value="${unitInfo.config['ram'].speed}" selected="selected">Ram/Cat</option>
 						</select>
 					</div>
 				</div>
 				<div class="ra-flex-6">
 					<div class="ra-mb15">
-						<label for="support_unit">Unidade de suporte mais lenta</label>
+						<label for="support_unit">Slowest Support unit</label>
 						<select id="support_unit">
-							<option value="${unitInfo.config['spear'].speed}">Lanceiros/Arqueiros</option>
-							<option value="${unitInfo.config['sword'].speed}" selected="selected">Espadas</option>
-							<option value="${unitInfo.config['spy'].speed}">Batedores</option>
-							<option value="${knightSpeed}" data-option-unit="knight">Paladino</option>
-							<option value="${unitInfo.config['heavy'].speed}">Pesada</option>
-							<option value="${unitInfo.config['catapult'].speed}">Catas</option>
+							<option value="${unitInfo.config['spear'].speed}">Spear/Archer</option>
+							<option value="${unitInfo.config['sword'].speed}" selected="selected">Sword</option>
+							<option value="${unitInfo.config['spy'].speed}">Spy</option>
+							<option value="${knightSpeed}" data-option-unit="knight">Paladin</option>
+							<option value="${unitInfo.config['heavy'].speed}">HC</option>
+							<option value="${unitInfo.config['catapult'].speed}">Cat</option>
 						</select>
 					</div>
 				</div>
 			</div>
 			<div class="ra-mb15">
-				<label for="target_coords">Coordenadas Alvo</label>
+				<label for="target_coords">Targets Coords</label>
 				<textarea id="target_coords"></textarea>
 			</div>
 			<div class="ra-flex">
 				<div class="ra-flex-4">
 					<div class="ra-mb15">
-						<label for="nobel_coords">Coordenadas Nobres</label>
+						<label for="nobel_coords">Nobles Coords</label>
 						<textarea id="nobel_coords"></textarea>
 					</div>
 					<div class="ra-mb15">
-						<label for="nobel_count">Nobres por Alvo</label>
+						<label for="nobel_count">Nobles per Target</label>
 						<input id="nobel_count" type="text" value="1">
 					</div>
 				</div>
 				<div class="ra-flex-4">
 					<div class="ra-mb15">
-						<label for="nuke_coords">Coordenadas Fulls</label>
+						<label for="nuke_coords">Nukes Coords</label>
 						<textarea id="nuke_coords"></textarea>
 					</div>
 					<div class="ra-mb15">
-						<label for="nuke_count">Fulls por Alvo</label>
+						<label for="nuke_count">Nukes per Target</label>
 						<input id="nuke_count" type="text" value="1">
 					</div>
 				</div>
 				<div class="ra-flex-4">
 					<div class="ra-mb15">
-						<label for="support_coords">Coordenadas de Apoio</label>
+						<label for="support_coords">Support Coords</label>
 						<textarea id="support_coords"></textarea>
 					</div>
 					<div class="ra-mb15">
-						<label for="support_count">Apoio por aldeia</label>
+						<label for="support_count">Support per Target</label>
 						<input id="support_count" type="text" value="1">
 					</div>
 				</div>
 			</div>
 			<div class="ra-mb15">
-				<a id="submit_btn" class="button" onClick="handleSubmit();">Criar plano!</a>
+				<a id="submit_btn" class="button" onClick="handleSubmit();">Get Plan!</a>
 			</div>
 			<div class="ra-mb15">
-				<label for="results">Resultados</label>
+				<label for="results">Results</label>
 				<textarea id="results"></textarea>
 			</div>
 		`;
