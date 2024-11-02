@@ -140,7 +140,7 @@ var scriptConfig = {
             'Send in': 'Enviar em',
             Send: 'Enviar',
             'No possible snipe options found!':
-                'Nenhuma op\u00e7\u00e3o poss\u00edvel de sniep encontrada!',
+                'Nenhuma op\u00e7\u00e3o poss\u00edvel de snipe encontrada!',
             'combinations found': 'combina\u00e7\u00f5es encontradas',
             'Export as BB Code': 'Exportar como C\u00f3digo BB',
             'Nothing to export!': 'Nada para exportar!',
