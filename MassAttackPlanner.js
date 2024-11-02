@@ -268,7 +268,10 @@ var xml2json = function ($xml) {
     return data;
 };
 
-
+// Helper: Generates script info
+function scriptInfo() {
+    return `[${scriptData.name} ${scriptData.version}]`;
+}
 
 // Helper: Prints universal debug information
 function initDebug() {
