@@ -447,7 +447,8 @@ $.getScript(
                                                         // Click the "Attack" button on the rally point page
                                                         document.getElementById('target_attack').click();
                                                     }
-                                                }
+                                                }`;
+
                     let tableContent = generateBarbariansTable(
                         filteredByRadiusBarbs,
                         currentVillage
