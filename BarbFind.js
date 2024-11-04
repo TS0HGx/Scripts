@@ -78,11 +78,11 @@ var scriptConfig = {
             'There was an error!': 'There was an error!',
         },
         pt_PT: {
-            'Barbs Finder': 'Procurador de BÃ¡rbaras',
-            'Min Points:': 'Pontos mÃ­nimos:',
-            'Max Points:': 'Pontos mÃ¡ximos:',
+            'Barbs Finder': 'Procurador de Bárbaras',
+            'Min Points:': 'Pontos mínimos:',
+            'Max Points:': 'Pontos máximos:',
             'Radius:': 'Raio:',
-            'Barbs found:': 'BÃ¡rbaras encontradas:',
+            'Barbs found:': 'Bárbaras encontradas:',
             'Coordinates:': 'Coordenadas:',
             'Error while fetching "village.txt"!':
                 'Erro ao procurar "village.txt"!',
@@ -96,7 +96,7 @@ var scriptConfig = {
             'Current Village:': 'Aldeia Atual:',
             'Sequential Light Script:': 'Script sequencial de leves:',
             Help: 'Ajuda',
-            'There was an error!': 'There was an error!',
+            'There was an error!': 'Erro encontrado!',
         },
         pt_BR: {
             'Barbs Finder': 'Procurador de BÃ¡rbaras',
