@@ -414,7 +414,40 @@ $.getScript(
                     );
                     let barbariansCount = barbariansCoordsArray.length;
                     let barbariansCoordsList = barbariansCoordsArray.join(' ');
-                    let scoutScript = `javascript:coords='${barbariansCoordsList}';var doc=document;if(window.frames.length>0 && window.main!=null)doc=window.main.document;url=doc.URL;if(url.indexOf('screen=place')==-1)alert('Use the script in the rally point page!');coords=coords.split(' ');index=0;farmcookie=document.cookie.match('(^|;) ?farm=([^;]*)(;|$)');if(farmcookie!=null)index=parseInt(farmcookie[2]);if(index>=coords.length)alert('All villages were extracted, now start from the first!');if(index>=coords.length)index=0;coords=coords[index];coords=coords.split('|');index=index+1;cookie_date=new Date(2030,1,1);document.cookie ='farm='+index+';expires='+cookie_date.toGMTString();doc.forms[0].x.value=coords[0];doc.forms[0].y.value=coords[1];$('#place_target').find('input').val(coords[0]+'|'+coords[1]);doc.forms[0].light.value=5;`;
+                    let scoutScript = `            javascript:coords='${barbariansCoordsList}';
+                                                    var doc = document;
+                                                    if (window.frames.length > 0 && window.main != null) doc = window.main.document;
+                                                    url = doc.URL;
+                                                    
+                                                    // Check if we are on the confirmation page with the "Send Attack" button
+                                                    if (document.getElementById('troop_confirm_submit')) {
+                                                        // Click the "Send Attack" button on the confirmation page
+                                                        document.getElementById('troop_confirm_submit').click();
+                                                    } else {
+                                                        // Rally point page logic
+                                                        if (url.indexOf('screen=place') == -1) {
+                                                        alert('Use the script on the rally point page!');
+                                                    } else {
+                                                        coords = coords.split(' ');
+                                                        index = 0;
+                                                        farmcookie = document.cookie.match('(^|;) ?farm=([^;]*)(;|$)');
+                                                        if (farmcookie != null) index = parseInt(farmcookie[2]);
+                                                        if (index >= coords.length) alert('All villages were extracted, now start from the first!');
+                                                        if (index >= coords.length) index = 0;
+                                                        coords = coords[index];
+                                                        coords = coords.split('|');
+                                                        index = index + 1;
+                                                        cookie_date = new Date(2030, 1, 1);
+                                                        document.cookie = 'farm=' + index + ';expires=' + cookie_date.toGMTString();
+                                                        doc.forms[0].x.value = coords[0];
+                                                        doc.forms[0].y.value = coords[1];
+                                                        $('#place_target').find('input').val(coords[0] + '|' + coords[1]);
+                                                        doc.forms[0].light.value = 5;
+                                                
+                                                        // Click the "Attack" button on the rally point page
+                                                        document.getElementById('target_attack').click();
+                                                    }
+                                                }
                     let tableContent = generateBarbariansTable(
                         filteredByRadiusBarbs,
                         currentVillage
