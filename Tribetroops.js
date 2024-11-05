@@ -121,7 +121,7 @@ function deleteFilter(filter, i) {
 
 function readData() {
     if (game_data.mode == "members") {
-        var html = '<label> Reading...     </label><progress id="bar" max="1" value="0">  </progress>';
+        var html = '<label> A ler...     </label><progress id="bar" max="1" value="0">  </progress>';
         Dialog.show("Progress bar", html);
         filtres = {};
         if (localStorage.troopCounterFilter) {
@@ -232,6 +232,6 @@ function readData() {
 }
 
 function showData(data, mode) {
-    html = '<h3>Troop count:</h3><textarea readonly style="width:100%;height:500px;">' + data + '</textarea><br><br><button onclick="download(\'troops.csv\', data)">Download CSV</button>';
+    html = '<h3>Contagem de tropas:</h3><textarea readonly style="width:100%;height:500px;">' + data + '</textarea><br><br><button onclick="download(\'troops.csv\', data)">Download CSV</button>';
     Dialog.show("Troop count", html);
 }
