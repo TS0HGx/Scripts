@@ -1,10 +1,10 @@
 
 
 function openUI() {
-    html = '<head></head><body><h1>Contagem de Tropas</h1><form><fieldset><legend>Definicoes</legend><p><input type="radio" name="mode" id="of" value="Read troops of the village" onchange="setMode(\'members_troops\')">Tropas fora da aldeia</input></p><p><input type="radio" name="mode" id="in" value="Read defenses in the village" onchange="setMode(\'members_defense\')">Tropas na aldeia</input></p></fieldset><fieldset><legend>Filtros</legend><select id="variable"><option value="x">x</option><option value="y">y</option>' + createUnitOption() + '</select><select id="kind"><option value=">">\></option><option value="<">\<</option></select><input type="text" id="value"></input><input type="button" class="btn evt-confirm-btn btn-confirm-yes" onclick="addFilter()" value="Gravar Filtros"></input><p><table><tr><th>Variaveis filtradas</th><th>Operator</th><th>Valor</th><th></th></tr>' + createFilterTable() + '</form></p></fieldset><div><p><input type="button" class="btn evt-confirm-btn btn-confirm-yes" id="run" onclick="readData()" value="Carregar"></input></p></div></body>';
+    html = '<head></head><body><h1>Contagem de Tropas</h1><form><fieldset><legend>Definicoes</legend><p><input type="radio" name="mode" id="of" value="Read troops of the village" onchange="setMode(\'tropas_dos_membros\')">Tropas fora da aldeia</input></p><p><input type="radio" name="mode" id="in" value="Read defenses in the village" onchange="setMode(\'Defesa_membros\')">Tropas na aldeia</input></p></fieldset><fieldset><legend>Filtros</legend><select id="variable"><option value="x">x</option><option value="y">y</option>' + createUnitOption() + '</select><select id="kind"><option value=">">\></option><option value="<">\<</option></select><input type="text" id="value"></input><input type="button" class="btn evt-confirm-btn btn-confirm-yes" onclick="addFilter()" value="Gravar Filtros"></input><p><table><tr><th>Variaveis filtradas</th><th>Operator</th><th>Valor</th><th></th></tr>' + createFilterTable() + '</form></p></fieldset><div><p><input type="button" class="btn evt-confirm-btn btn-confirm-yes" id="run" onclick="readData()" value="Carregar"></input></p></div></body>';
     Dialog.show("Troop counter", html);
     if (localStorage.troopCounterMode) {
-        if (localStorage.troopCounterMode == "members_troops") {
+        if (localStorage.troopCounterMode == "tropas_dos_membros") {
             document.getElementById("of").checked = true;
  
         } else {
@@ -171,7 +171,7 @@ function readData() {
             if (temp.length === 2 || temp.length === 4) {
                 rows = page.responseText.split("vis w100")[temp.length - 1].split("<tr>");
                 step = 1;
-                if (mode == "members_defense") {
+                if (mode == "Defesa_membros") {
                     step = 2;
                 }
                 for (j = 2; j + step < rows.length; j = j + step) {
@@ -231,7 +231,7 @@ function readData() {
 }
 
 function showData(data) {
-    html = '<head></head><body><p><h2>Informacao da Tribo</h2>Mode selected: ' + mode + '</p><p><textarea readonly=true>' + data + '</textarea></p><p><input type="button" class="btn evt-confirm-btn btn-confirm-yes" id="download" onclick="download(\'tribe info\',data)" value="Download csv"></input><input type="button" class="btn evt-confirm-btn btn-confirm-no" onclick="openUI()" value="Voltar para o menu"></input></p></body>';
+    html = '<head></head><body><p><h2>Informacao da Tribo</h2>Modo Selecionado: ' + mode + '</p><p><textarea readonly=true>' + data + '</textarea></p><p><input type="button" class="btn evt-confirm-btn btn-confirm-yes" id="download" onclick="download(\'tribe info\',data)" value="Download csv"></input><input type="button" class="btn evt-confirm-btn btn-confirm-no" onclick="openUI()" value="Voltar para o menu"></input></p></body>';
     Dialog.show("Tribe data", html);
 }
 
