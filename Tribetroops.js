@@ -1,39 +1,36 @@
-function readData() {
-    console.log("Reading data...");
-    
-    // Placeholder data (replace this with actual data fetch)
-    const troopData = [
-        { coords: "123|456", player: "Player1", units: { spear: 10, sword: 20, axe: 15 } },
-        { coords: "789|012", player: "Player2", units: { spear: 30, sword: 5, axe: 10 } }
-    ];
+function showData(data) {
+    // Ensure 'mode' is available globally or passed to this function if it's used in the popup message.
+    let mode = localStorage.troopCounterMode || "N/A";
 
-    let csvData = "Coords,Player,Spear,Sword,Axe,Total Troops\n";
-    troopData.forEach(data => {
-        const totalTroops = data.units.spear + data.units.sword + data.units.axe;
-        csvData += `${data.coords},${data.player},${data.units.spear},${data.units.sword},${data.units.axe},${totalTroops}\n`;
-    });
-
-    // Add CSV data and download button to the UI
-    const outputDiv = document.createElement("div");
-    outputDiv.innerHTML = `
-        <h3>Troop Data:</h3>
-        <textarea style="width:100%;height:100px;" readonly>${csvData}</textarea><br>
-        <button onclick="downloadCSV('${csvData}')">Download as CSV</button>
+    // Generate HTML for the troop data display and download option
+    const html = `
+        <head></head>
+        <body>
+            <p><h2>Tribe Data</h2>Mode selected: ${mode}</p>
+            <p><textarea style="width:100%;height:150px;" readonly>${data}</textarea></p>
+            <p>
+                <button class="btn evt-confirm-btn btn-confirm-yes" id="download" onclick="downloadCSV()">Download as CSV</button>
+                <button class="btn evt-confirm-btn btn-confirm-no" onclick="openUI()">Back to Main Menu</button>
+            </p>
+        </body>
     `;
-    document.body.appendChild(outputDiv);  // Append to body to ensure it displays
 
-    console.log("Data ready for download.");
+    Dialog.show("Tribe data", html);
 }
 
-// Download CSV data function (unchanged)
-function downloadCSV(data) {
-    const filename = "troop_data.csv";
+// Updated downloadCSV function to work without passing parameters
+function downloadCSV() {
+    const dataText = document.querySelector("textarea").value;  // Grabs the text from the textarea
+    const filename = "tribe_data.csv";
+    
     const element = document.createElement("a");
-    element.setAttribute("href", "data:text/csv;charset=utf-8," + encodeURIComponent(data));
+    element.setAttribute("href", "data:text/csv;charset=utf-8," + encodeURIComponent(dataText));
     element.setAttribute("download", filename);
+    
     element.style.display = "none";
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
+
     console.log("CSV downloaded:", filename);
 }
