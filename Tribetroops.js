@@ -35,7 +35,9 @@ function openUI() {
             </div>
         </form>
     </body>`;
-    Dialog.show("Troop counter", html);
+    alert("UI Opened");
+    console.log("Opening UI");
+    document.body.innerHTML = html;
 
     if (localStorage.troopCounterMode) {
         document.getElementById(localStorage.troopCounterMode === "members_troops" ? "of" : "in").checked = true;
@@ -46,16 +48,6 @@ function openUI() {
 
 function setMode(mode) {
     localStorage.troopCounterMode = mode;
-}
-
-function download(filename, text) {
-    const element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-    element.setAttribute('download', filename);
-    element.style.display = 'none';
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
 }
 
 function getPlayerDict() {
@@ -91,7 +83,7 @@ function addFilter() {
         localStorage.troopCounterFilter = JSON.stringify(filters);
         openUI();
     } else {
-        UI.ErrorMessage("Insert a valid value", 3000);
+        alert("Insert a valid value");
     }
 }
 
@@ -124,8 +116,8 @@ function deleteFilter(filter, idx) {
 
 function readData() {
     if (game_data.mode === "members") {
-        const html = '<label> Reading...     </label><progress id="bar" max="1" value="0"></progress>';
-        Dialog.show("Progress bar", html);
+        alert("Reading data...");
+        console.log("Starting data reading process");
 
         const mode = localStorage.troopCounterMode;
         const playerInfoList = Array.from(document.getElementsByClassName("vis")[2].rows).slice(1, -1).map(row => ({
@@ -140,7 +132,8 @@ function readData() {
 
         (function loop() {
             if (currentIndex >= playerInfoList.length) {
-                return showData(data);
+                showData(data);
+                return;
             }
 
             const playerId = playerInfoList[currentIndex].playerId;
@@ -174,6 +167,8 @@ function readData() {
 }
 
 function showData(data) {
+    alert("Data read complete!");
     const html = `<h3>Troop count:</h3><textarea readonly style="width:100%;height:500px;">${data}</textarea><br><br><button onclick="download('troops.csv', data)">Download CSV</button>`;
-    Dialog.show("Troop count", html);
+    console.log("Displaying troop data");
+    document.body.innerHTML = html;
 }
