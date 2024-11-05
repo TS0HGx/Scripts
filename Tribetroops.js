@@ -1,6 +1,6 @@
 function openUI() {
-    html = '<head></head><body><h1>Contador de tropas tribo</h1><form><fieldset><legend>Settings</legend><p><input type="radio" name="mode" id="of" value="Read troops of the village" onchange="setMode(\'members_troops\')">Ler tropas fora da aldeia</input></p><p><input type="radio" name="mode" id="in" value="Read defenses in the village" onchange="setMode(\'members_defense\')">Ler tropas na aldeia</input></p></fieldset><fieldset><legend>Filters</legend><select id="variable"><option value="x">x</option><option value="y">y</option>' + createUnitOption() + '</select><select id="kind"><option value=">">\></option><option value="<">\<</option></select><input type="text" id="value"></input><input type="button" class="btn evt-confirm-btn btn-confirm-yes" onclick="addFilter()" value="Save filter"></input><p><table><tr><th>Variable filtered</th><th>Operator</th><th>Value</th><th></th></tr>' + createFilterTable() + '</form></p></fieldset><div><p><input type="button" class="btn evt-confirm-btn btn-confirm-yes" id="run" onclick="readData()" value="Read data"></input></p></div></body>';
-    Dialog.show("Contador de Tropas", html);
+    html = '<head></head><body><h1>Tribe troop counter</h1><form><fieldset><legend>Settings</legend><p><input type="radio" name="mode" id="of" value="Read troops of the village" onchange="setMode(\'members_troops\')">Read troops of the village</input></p><p><input type="radio" name="mode" id="in" value="Read defenses in the village" onchange="setMode(\'members_defense\')">Read defenses in the village</input></p></fieldset><fieldset><legend>Filters</legend><select id="variable"><option value="x">x</option><option value="y">y</option>' + createUnitOption() + '</select><select id="kind"><option value=">">\></option><option value="<">\<</option></select><input type="text" id="value"></input><input type="button" class="btn evt-confirm-btn btn-confirm-yes" onclick="addFilter()" value="Save filter"></input><p><table><tr><th>Variable filtered</th><th>Operator</th><th>Value</th><th></th></tr>' + createFilterTable() + '</form></p></fieldset><div><p><input type="button" class="btn evt-confirm-btn btn-confirm-yes" id="run" onclick="readData()" value="Read data"></input></p></div></body>';
+    Dialog.show("Troop counter", html);
     if (localStorage.troopCounterMode) {
         if (localStorage.troopCounterMode == "members_troops") {
             document.getElementById("of").checked = true;
@@ -68,13 +68,13 @@ function addFilter() {
     }
     if (filters[document.getElementById("variable").value]) {
         if (isNaN(document.getElementById("value").value)) {
-            UI.ErrorMessage("Adicione um valor Valido", 3000);
+            UI.ErrorMessage("Insert a valid value", 3000);
         } else {
             filters[document.getElementById("variable").value].push([document.getElementById("kind").value, document.getElementById("value").value]);
         }
     } else {
         if (isNaN(document.getElementById("value").value)) {
-            UI.ErrorMessage("Adicione um valor Valido", 3000);
+            UI.ErrorMessage("Insert a valid value", 3000);
         } else {
             filters[document.getElementById("variable").value] = [[document.getElementById("kind").value, document.getElementById("value").value]];
         }
@@ -121,7 +121,7 @@ function deleteFilter(filter, i) {
 
 function readData() {
     if (game_data.mode == "members") {
-        var html = '<label> A ler...     </label><progress id="bar" max="1" value="0">  </progress>';
+        var html = '<label> Reading...     </label><progress id="bar" max="1" value="0">  </progress>';
         Dialog.show("Progress bar", html);
         filtres = {};
         if (localStorage.troopCounterFilter) {
@@ -232,6 +232,6 @@ function readData() {
 }
 
 function showData(data, mode) {
-    html = '<h3>Contagem de tropas:</h3><textarea readonly style="width:100%;height:500px;">' + data + '</textarea><br><br><button onclick="download(\'troops.csv\', data)">Download CSV</button>';
+    html = '<h3>Troop count:</h3><textarea readonly style="width:100%;height:500px;">' + data + '</textarea><br><br><button onclick="download(\'troops.csv\', data)">Download CSV</button>';
     Dialog.show("Troop count", html);
 }
