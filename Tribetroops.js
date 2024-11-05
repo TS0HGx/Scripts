@@ -1,9 +1,8 @@
-// Start with a basic script check to see if it's loaded
-console.log("Troop counter script is running!");
+console.log("Enhanced Troop Counter Script is running!");
 
-// Step 1: Basic UI Setup with Alert Check
+// Open the UI with filter options and a button to read data
 function openUI() {
-    alert("Opening UI");
+    alert("Opening Enhanced UI");
     const html = `
         <div>
             <h1>Tribe Troop Counter</h1>
@@ -16,43 +15,107 @@ function openUI() {
                     <input type="radio" name="mode" id="in" value="members_defense" onclick="setMode('members_defense')"> Read defenses in the village
                 </label>
             </fieldset>
+            <fieldset>
+                <legend>Filters</legend>
+                <label for="unitSelect">Filter by unit:</label>
+                <select id="unitSelect">
+                    <option value="spear">Spear</option>
+                    <option value="sword">Sword</option>
+                    <option value="axe">Axe</option>
+                </select>
+                <label for="comparison">Comparison:</label>
+                <select id="comparison">
+                    <option value=">">></option>
+                    <option value="<"><</option>
+                </select>
+                <input type="number" id="value" placeholder="Value">
+                <button onclick="addFilter()">Add Filter</button>
+                <div id="filterTable">${createFilterTable()}</div>
+            </fieldset>
             <button onclick="readData()">Read Data</button>
         </div>
     `;
     document.body.innerHTML = html;
 }
 
-// Step 2: Set Mode Function with Confirmation
+// Set the troop counter mode
 function setMode(mode) {
     console.log("Setting mode to:", mode);
     localStorage.troopCounterMode = mode;
 }
 
-// Step 3: Read Data Function to Simulate Data Retrieval and Display
+// Function to add filter to local storage
+function addFilter() {
+    const unit = document.getElementById("unitSelect").value;
+    const comparison = document.getElementById("comparison").value;
+    const value = document.getElementById("value").value;
+
+    if (!value || isNaN(value)) {
+        alert("Please enter a valid number for the filter.");
+        return;
+    }
+
+    let filters = JSON.parse(localStorage.getItem("troopCounterFilter") || "{}");
+    if (!filters[unit]) {
+        filters[unit] = [];
+    }
+    filters[unit].push([comparison, value]);
+    localStorage.setItem("troopCounterFilter", JSON.stringify(filters));
+
+    console.log("Added filter:", unit, comparison, value);
+    openUI(); // Refresh UI with updated filters
+}
+
+// Generate filter table HTML
+function createFilterTable() {
+    const filters = JSON.parse(localStorage.getItem("troopCounterFilter") || "{}");
+    let tableHTML = "<table><tr><th>Unit</th><th>Comparison</th><th>Value</th></tr>";
+    for (const unit in filters) {
+        filters[unit].forEach(([comparison, value]) => {
+            tableHTML += `<tr><td>${unit}</td><td>${comparison}</td><td>${value}</td></tr>`;
+        });
+    }
+    tableHTML += "</table>";
+    return tableHTML;
+}
+
+// Simulate reading data (replace with actual data fetching)
 function readData() {
     console.log("Reading data...");
-
-    // Simulated data for testing purposes
-    const troopData = {
-        coords: "123|456",
-        player: "Player1",
-        units: { spear: 10, sword: 20, axe: 15 }
-    };
-
-    // Format data as CSV
-    const csvData = `Coords,Player,Spear,Sword,Axe,Total Troops\n${troopData.coords},${troopData.player},${troopData.units.spear},${troopData.units.sword},${troopData.units.axe},${troopData.units.spear + troopData.units.sword + troopData.units.axe}`;
     
-    // Show result in an alert (for testing) or in the page
-    alert("Troop Data:\n" + csvData);
-    console.log("Troop data read successfully:", csvData);
+    // Placeholder data (replace this with actual data fetch)
+    const troopData = [
+        { coords: "123|456", player: "Player1", units: { spear: 10, sword: 20, axe: 15 } },
+        { coords: "789|012", player: "Player2", units: { spear: 30, sword: 5, axe: 10 } }
+    ];
 
-    // Display the data in a text area for download
+    let csvData = "Coords,Player,Spear,Sword,Axe,Total Troops\n";
+    troopData.forEach(data => {
+        const totalTroops = data.units.spear + data.units.sword + data.units.axe;
+        csvData += `${data.coords},${data.player},${data.units.spear},${data.units.sword},${data.units.axe},${totalTroops}\n`;
+    });
+
+    // Display the CSV in a text area and show download button
     document.body.innerHTML += `
         <div>
             <h3>Troop Data:</h3>
-            <textarea style="width:100%;height:100px;" readonly>${csvData}</textarea>
+            <textarea style="width:100%;height:100px;" readonly>${csvData}</textarea><br>
+            <button onclick="downloadCSV('${csvData}')">Download as CSV</button>
         </div>
     `;
+}
+
+// Download CSV data
+function downloadCSV(data) {
+    const filename = "troop_data.csv";
+    const element = document.createElement("a");
+    element.setAttribute("href", "data:text/csv;charset=utf-8," + encodeURIComponent(data));
+    element.setAttribute("download", filename);
+    element.style.display = "none";
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+    console.log("CSV downloaded:", filename);
 }
 
 // Initialize UI
