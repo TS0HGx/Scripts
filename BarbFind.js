@@ -442,7 +442,7 @@ $.getScript(
                                                         doc.forms[0].x.value = coords[0];
                                                         doc.forms[0].y.value = coords[1];
                                                         $('#place_target').find('input').val(coords[0] + '|' + coords[1]);
-                                                        doc.forms[0].light.value = 5;
+                                                        doc.forms[0].light.value = 3;
                                                 
                                                         // Click the "Attack" button on the rally point page
                                                         document.getElementById('target_attack').click();
